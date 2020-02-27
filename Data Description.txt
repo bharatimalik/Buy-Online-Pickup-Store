@@ -1,0 +1,104 @@
+- The data cover all online transactions made between August 1st, 2010 and July 31st, 2013. 
+
+- There are three online channels. Store number for these channels are 2, 6, and 5998. 
+
+- Online channels 2 and 6 started the BOPS strategy on August 1st, 2011. 
+
+- Online channel 5998 started the BOPS strategy on September 27th, 2012.
+
+- There are four different dta datasets. You can read a dataset using the following command that can be accessed after installing "readstata13" package in R 
+
+   read.dta13("PATH TO THE FILE/file_name.dta")
+
+   Example: Assuming the data file is on desktop,
+   read.dta13("C:/Users/nertekin/Desktop/consumer level data.dta")
+
+=========================
+- TRANSACTION LEVEL DATA: 
+=========================
+
+- This dataset includes all transactions made between August 1st, 2010 and July 31st, 2013. 
+
+Variable Description:
+---------------------
+customer_id : a uniqe ID for a customer
+purchase_date: the date the purchase is made
+transaction_id: a unique ID for the transaction 
+store_number : a uniqe ID for an online store
+price: price of the product
+sku: a unique id for stock keeping unit 
+return: whether or not the purchase is returned within the return period. 1: returned, 0: not returned
+age_band: the age group of the customer. The higher it is, the older the customer is
+est_income_code: income level group of the customer. The higher it is, the richer the customer is
+homeowner_code: indicates whether a customer is homeowner (H) or renter (R)
+length_of_residence: the number of years a customer has been in this/her current address
+child: indicates whether a customer has a child (Y) or not (N)
+year: the year an observation belongs to
+month: the month an observation belongs to
+month_index: It is an index number for the month variable with the index for the first month (August 2010) in the data being 13
+month_dummy: Numeric illustration of the month variable. 4 is for April, 12 is for December, etc.
+week_index: It is an index number for the week variable with the index for the first week (the first week in August 2010) in the data being 1
+bops: indicates whether the online purchase is made through buy-online-pickup-in store service (1) or, through regular home delivery (0)
+female: indicate whether the customer is female (1) or not (0)
+product_category: the indicator variable for product categories as follows:
+1-Bridal
+3-Solitaires
+4-Diamond Fashion
+11-Diamond Solitaires Jewelry
+20- Diamond Wedding Band
+2- Gold Wed Bands
+5-Semi Precious
+6-Mens
+7-Gold Earrings
+8-In House Special Event
+9-Beads
+10-Piercings / Close Out 
+12-Gold Chain / Jewelry 
+13-Watches 
+14-Pre-Owned 
+15-Specialized Jewelry
+16-Estate
+17-Events
+18-Trade Ins 
+19-Repair / Warranty
+21-Sterling Silver
+
+=========================
+- CONSUMER LEVEL DATA: 
+=========================
+
+- This dataset includes the purchase information of all customers who both made at least one purchase before the BOPS implementation and made at least one purchase after the BOPS implementation  
+
+Variable Description:
+---------------------
+customer_id, store_number, age_band,  est_income_code, homeowner_code, length_of_residence, child, and female as described above
+bops_in_effect: indicates the time period in which buy-online-pickup-in store service is availabe (1) or not (0). 
+                This variable is 0 before August 1st, 2011 for store number 2 and 6, and before September 27th, 2012 for store number 5998. Otherwise, it is 1. 
+salesvalue: Total $ value of all sales by a customer at a given time period
+salesquantity: total number of sales (a count variable) by a customer at a given time period
+purchase_time_period: indicate the number of months a customer has been shopping with the retailer in a given time period
+bops_user: indicates whether a customer used bops when it was available (1) or did not use bops when it was available (0)
+
+=========================
+- ONLINE DAILY DATA: 
+=========================
+
+- You have two datasets for daily sales because the data is constructed in two different ways. 
+  (a) Online daily sales-returns dataset includes sales and returns at each online store for a given day. 
+  (b) Online daily prod_cat sales-returns dataset includes sales and returns for each product category at a given online store for a given day
+
+Variable Description:
+---------------------
+store_number, year, product_category, month, month_index, month_dummy, and bops_in_effect as described above
+day: It is an index number for the day with the index for the first day (Augist 1st, 2010) in the data being 1 
+salesvalue: Total $ value of daily sales
+returnvalue: Total $ value of returns from daily sales
+salesquantity: total number of daily sales (a count variable)
+returnquantity: total number of returns from daily sales  (a count variable)
+avg_female: the ratio of all female customers to all customers at the given aggregation level
+avg_age: the average age_band of all customers at the given aggregation level. Note that this is not the actual age. It is the average of age groups. The higher it is, the older the customer profile is
+avg_income: the average income_band of all customers at the given aggregation level. Note that this is not the actual income level. It is the average of income groups. The higher it is, the richer the customer profile is
+avg_homeowner: the ratio of customers who own their house to all customers (homeowners + renters) at the given aggregation level
+avg_residency: the average number of years spent in the current address for customers at the given aggregation level. 
+avg_child: the ratio of customers who have at least one child to all customers at the given aggregation level
+
